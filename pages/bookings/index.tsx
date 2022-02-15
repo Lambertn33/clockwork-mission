@@ -35,7 +35,7 @@ export default function Bookings() {
             </div>
             {
                bookings.length > 0 ?
-               bookings.map((booking: { id: Key | null | undefined; event_date: string | number | Date; from: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; duration: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; guest: { email: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }[]; event: { title: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }; })=>{
+               bookings.map((booking: { id: Key | null | undefined; event_date: string | number | Date; from: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; duration: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; guest: { email: any; names:any }[]; event: { title: boolean | ReactChild | ReactFragment | ReactPortal | null | undefined; }; })=>{
                 return(
                     <div key={booking.id} className='p-12 pt-8 mt-8 bg-white border border-gray-300 rounded-sm'>
                     <div className='flex justify-between'>
