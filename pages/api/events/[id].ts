@@ -7,13 +7,8 @@ export default async(req: NextApiRequest, res: NextApiResponse) =>{
         where: {
             userId: String(userId)
         },
-        select: {
-            id:true,
-            title:true,
-            description:true,
-            URL:true,
-            minutes:true,
-            userId:true
+        include: {
+            booking:true
         }
     });
     return res.status(200).json(events);

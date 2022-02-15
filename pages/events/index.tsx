@@ -147,7 +147,7 @@ export default function Index() {
                         <div className='mt-4'>
                            {
                                 !isFetchingEvents && events.length > 0 ? 
-                                events.map((event: { id: React.Key | null | undefined; minutes: any; })=>{
+                                events.map((event: any)=>{
                                     return(
                                       <div key={event.id} className='p-4 pt-4 bg-white border border-gray-300 rounded-sm'>
                                        <div className='flex justify-between'>
@@ -164,7 +164,9 @@ export default function Index() {
                                                   </div>
                                               </div>
                                            </div>
-                                           <div className='flex items-center px-4'>
+                                           {
+                                               event?.booking.length == 0 ?
+                                               <div className='flex items-center px-4'>
                                                <Link href={{
                                                    pathname:'/events/[user]/[event]',
                                                    query:{event:event.id , user:session?.user?.name}
@@ -173,7 +175,11 @@ export default function Index() {
                                                   <GoLinkExternal/>
                                                   </a>
                                                </Link>
-                                           </div>
+                                           </div>:
+                                           <span className='font-bold text-sm text-red-500'>
+                                               Event booked..
+                                           </span>
+                                           }
                                        </div>
                                       </div>
                                     )
