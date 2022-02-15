@@ -1,6 +1,6 @@
 import React from 'react'
 import {useRouter} from 'next/router'
-import { useMutation, useQuery } from 'react-query'
+import { useQuery } from 'react-query'
 import { useSession } from "next-auth/react";
 import axios from 'axios';
 import { IoIosCheckmark, IoLogoGoogle } from 'react-icons/io';
