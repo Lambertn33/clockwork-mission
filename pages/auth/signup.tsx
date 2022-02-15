@@ -3,7 +3,7 @@ import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import FormInput from "@components/Form/FormInput";
-import FormButton from '@components/Form/FormButton'
+import FormButton from '@components/Form/FormButton';
 import FormErrorMessage from "@components/Form/FormErrorMessage";
 
 interface IState {
