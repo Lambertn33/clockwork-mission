@@ -8,7 +8,7 @@ import {FaUserAlt} from 'react-icons/fa'
 import { GoLinkExternal } from 'react-icons/go'
 import Link from 'next/link';
 
-export default function index() {
+export default function Index() {
     const { data: session, status } = useSession();
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState('')

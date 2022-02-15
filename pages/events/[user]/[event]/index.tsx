@@ -10,7 +10,7 @@ import { useQuery , useMutation , useQueryClient } from "react-query";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function index() {
+export default function Index() {
     const { data: session, status } = useSession();
     const router = useRouter()
     const [startDate , setStartDate] = useState(new Date())

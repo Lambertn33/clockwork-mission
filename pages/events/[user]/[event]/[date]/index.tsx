@@ -10,7 +10,7 @@ import {useRouter} from 'next/router'
 import { useMutation, useQuery } from 'react-query'
 import { useSession } from "next-auth/react";
 
-export default function index() {
+export default function Index() {
   const { data: session, status } = useSession();
   const router = useRouter()
   const  id  = router?.query["event"]

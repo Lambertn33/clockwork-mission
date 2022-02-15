@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import axios from 'axios';
 import { IoIosCheckmark, IoLogoGoogle } from 'react-icons/io';
 
-export default function success() {
+export default function Success() {
     const { data: session, status } = useSession();
     const router = useRouter()
     const  eventId  = router?.query["eventId"]
