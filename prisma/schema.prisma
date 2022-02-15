@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  email     String    @unique
+  createdAt DateTime  @default(now())
+  password  String
+  events    Event[]
+  bookings  Booking[]
+
+  @@map("users")
+}
+
+model Event {
+  id          String    @id @default(uuid())
+  title       String
+  URL         String
+  description String
+  minutes     String
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  booking     Booking[]
+  createdAt   DateTime  @default(now()) @map(name: "created_at")
+  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+
+  @@map("events")
+}
+
+model Booking {
+  id            String   @id @default(uuid())
+  event_date    DateTime
+  event_type_id String
+  event         Event    @relation(fields: [event_type_id], references: [id])
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+  from          String
+  to            String
+  duration      String
+  createdAt     DateTime @default(now()) @map(name: "created_at")
+  updatedAt     DateTime @updatedAt @map(name: "updated_at")
+  guest         Guest[]
+  status        Status   @default(UPCOMING)
+
+  @@map("bookings")
+}
+
+model Guest {
+  id          String  @id @default(uuid())
+  booking_id  String
+  booking     Booking @relation(fields: [booking_id], references: [id])
+  email       String  @unique
+  names       String
+  description String
+
+  @@map("guests")
+}
+
+enum Status {
+  UPCOMING
+  PAST
+  SCHEDULED
+}
