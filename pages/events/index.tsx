@@ -78,7 +78,6 @@ export default function index() {
     const {data:events , isLoading:isFetchingEvents , isError:isFailedToFetchEvents , error:errorFetchingEvents} = useQuery("events",getUserEventTypes)
     if(isFetchingEvents) return <h2>Please wait...</h2>
     if(isFailedToFetchEvents) return <h2>There is an error...</h2>
-    console.log(events)
     return (
         <Shell>
             <div className='w-full h-full'>

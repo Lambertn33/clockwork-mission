@@ -3,9 +3,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { useSession } from "next-auth/react";
 
 export default async(req: NextApiRequest, res: NextApiResponse) =>{
+    const id = req?.query?.id
     const eventType = await prisma.event.findUnique({
         where:{
-            id:req?.query?.id
+            id:String(id)
         },
         select:{
             id:true,

@@ -3,9 +3,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { useSession } from "next-auth/react";
 
 export default async(req: NextApiRequest, res: NextApiResponse) =>{
-    const bookings = await prisma.event.findMany({
+    const userId = req?.query?.id
+    const events = await prisma.event.findMany({
         where:{
-            userId:req?.query?.id
+            userId: String(userId)
         },
         select:{
             id:true,
@@ -16,5 +17,5 @@ export default async(req: NextApiRequest, res: NextApiResponse) =>{
             userId:true
         }
     })
-    return res.status(200).json(bookings)
+    return res.status(200).json(events)
 }
