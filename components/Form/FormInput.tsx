@@ -30,7 +30,7 @@ interface Iprops {
         forgotPassword?:string,
         value:string,
         onChange:any,
-        placeholder:any
+        placeholder?:any
     }
 }
 
