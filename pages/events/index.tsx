@@ -147,7 +147,7 @@ export default function Index() {
                         <div className='mt-4'>
                            {
                                 !isFetchingEvents && events.length > 0 ? 
-                                events.map((event: { id: React.Key | null | undefined; minutes: {} | null | undefined; })=>{
+                                events.map((event: { id: React.Key | null | undefined; minutes: any; })=>{
                                     return(
                                       <div key={event.id} className='p-4 pt-4 bg-white border border-gray-300 rounded-sm'>
                                        <div className='flex justify-between'>

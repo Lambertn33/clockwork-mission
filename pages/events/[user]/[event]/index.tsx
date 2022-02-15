@@ -29,7 +29,7 @@ export default function Index() {
         return day !== 0 && day !== 6;
       };
      const formatTime = ( date:any) => {
-         let fromTime = `${date.getHours()}:${date.getMinutes()}`
+         const fromTime = `${date.getHours()}:${date.getMinutes()}`
          setStartDate(date)
          setEventDate(date.toISOString().slice(0, 10))
          setFrom(fromTime)

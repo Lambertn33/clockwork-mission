@@ -13,6 +13,6 @@ export default function FormErrorMessage({onHide , errorMessage}:Iprops['formErr
 interface Iprops{
     formError:{
         errorMessage:string,
-        onHide:Function
+        onHide:any
     }
 }

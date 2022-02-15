@@ -12,7 +12,7 @@ interface IState {
     type: string,
     prefix?: string,
     forgotPassword?: string,
-    onChange: Function,
+    onChange: any,
     value: string
   },
   button: {
