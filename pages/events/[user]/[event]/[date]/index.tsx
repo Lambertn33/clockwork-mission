@@ -31,13 +31,11 @@ function hideErrorMessage(){
 }
 
 const {data:eventType,isLoading:isFetchingEvent , isError:isFetchingEventError,error:fetchingEventError} = useQuery('singleEventForGuest',getSingleEventType)
-const createNewGuest = async() =>{
+const createNewGuest = async(guest:Guest) =>{
     try {
         setIsSaving(true)
         const userId = session?.id
-        const response = await axios.post('/api/events/createGuest/post',{
-            names , email ,description ,eventType
-         })
+        const response = await axios.post('/api/events/createGuest/post',guest)
          if(response.data.status == 200){
              router.push({
                 pathname:"/bookings/success",
@@ -63,7 +61,8 @@ const { mutate } = useCreateNewGuest()
 
 const handleSubmit = (e:any) =>{
   e.preventDefault()
-   mutate( names,email,description,eventType)
+  const newGuest = { names,email,description,eventType}
+   mutate(newGuest)
 }
 
 if(isFetchingEvent ) {
@@ -139,4 +138,10 @@ else if(isFetchingEventError){
                  </div>
              </div>
   )
+}
+interface Guest{
+    names:String,
+    email:String,
+    description:String,
+    eventType:any
 }

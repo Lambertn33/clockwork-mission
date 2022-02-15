@@ -29,7 +29,8 @@ interface Iprops {
         prefix?:string,
         forgotPassword?:string,
         value:string,
-        onChange:any
+        onChange:any,
+        placeholder:any
     }
 }
 

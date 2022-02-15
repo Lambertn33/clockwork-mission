@@ -54,7 +54,6 @@ export default function index() {
             setIsSaving(false) 
             setHasError(true)
             setErrorMessage(error.response.data.message)
-            //console.log(error)
        }
 
     }
