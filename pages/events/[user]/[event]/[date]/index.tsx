@@ -140,8 +140,8 @@ else if(isFetchingEventError){
   )
 }
 interface Guest{
-    names:String,
-    email:String,
+    names:string,
+    email:string,
     description:String,
     eventType:any
 }
