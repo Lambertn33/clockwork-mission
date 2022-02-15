@@ -41,12 +41,10 @@ export default function index() {
         setUnformattedUrl(title.replace(/ /g,'-'))
         setUrl(`${window.location.hostname}/${unformattedUrl}`)
     }
-    const createNewEvent = async()=>{
+    const createNewEvent = async(eventType:EventType)=>{
         try {
-            const userId = session?.id
-            const response = await axios.post('/api/events/post',{
-                title,unformattedUrl,description,minutes,userId
-            })
+            
+            const response = await axios.post('/api/events/post',eventType)
             if(response.data.status == 200){
                 setIsSaving(false)
                 setTitle('')
@@ -67,13 +65,14 @@ export default function index() {
     const useCreateNewEvent = ()=>{
         return useMutation(createNewEvent)
     }
-    const { mutate } = useCreateNewEvent()
+    const { mutate} = useCreateNewEvent()
 
     const handleSubmit = (e:any) =>{
-      e.preventDefault()
-       mutate( title,unformattedUrl,description,minutes,userId)
+       e.preventDefault()
+       const userId:any = session?.id
+       const newEventType ={ title,unformattedUrl,description,minutes,userId}
+       mutate(newEventType)
     }
-
 
     const {data:events , isLoading:isFetchingEvents , isError:isFailedToFetchEvents , error:errorFetchingEvents} = useQuery("events",getUserEventTypes)
     if(isFetchingEvents) return <h2>Please wait...</h2>
@@ -123,7 +122,7 @@ export default function index() {
                                             </div>
                                             <div className="flex flex-col">
                                                 <label className="text-sm font-semibold text-left">Description</label>
-                                                <textarea name="" id="" cols="12" placeholder="A Quick Video Meeting" className="w-full px-4 py-2 text-sm border"  value={description} onChange={e => setDescription(e.target.value)}/>
+                                                <textarea name="" id=""  placeholder="A Quick Video Meeting" className="w-full px-4 py-2 text-sm border"  value={description} onChange={e => setDescription(e.target.value)}/>
                                             </div>
                                             <div className="flex flex-col">
                                                 <label className="text-sm font-semibold text-left">Length</label>
@@ -189,4 +188,12 @@ export default function index() {
             </div>
         </Shell>
     )
+}
+
+interface EventType{
+    title: string;
+    unformattedUrl: string;
+    description: string;
+    minutes: string;
+    userId: string;
 }

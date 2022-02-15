@@ -4,9 +4,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async (req: NextApiRequest, res: NextApiResponse) =>{
     try {
-        const { eventDate , from ,to ,eventTypeId , duration , userId} = req.body
+        const { startDate , from ,to ,id , duration , userId} = req.body
         //Inputs validation
-        if(!eventDate || !from){
+        if(!startDate || !from){
             res.status(400).json({
                 "message":"Please Fill All Fields"
             })
@@ -14,11 +14,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) =>{
         }
         const newBooking = await prisma.booking.create({
             data:{
-                event_date:eventDate,
+                event_date:startDate,
                 from:from,
                 to:to,
                 duration:duration,
-                event_type_id:eventTypeId,
+                event_type_id:id,
                 userId:userId,
             }
         })    

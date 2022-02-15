@@ -14,14 +14,14 @@ export default function index() {
     const { data: session, status } = useSession();
     const router = useRouter()
     const [startDate , setStartDate] = useState(new Date())
-    const [eventDate , setEventDate] = useState(new Date())
+    const [eventDate , setEventDate] = useState('')
     const [from , setFrom] = useState('')
     const [to , setTo] = useState('')
     const [hasError , setHasError] = useState(false)
     const [errorMessage , setErrorMessage] = useState('')
     const [isSaving , setIsSaving] = useState(false)
     const userId = session?.id
-    const  id  = router?.query["event"]
+    const  id = router?.query["event"]
     const queryClient = useQueryClient()
 
     const isWeekday = (date:any) => {
@@ -35,26 +35,26 @@ export default function index() {
          setFrom(fromTime)
          setTo(fromTime)
      }
-    const createNewBooking = async() =>{
+    const createNewBooking = async(booking:Booking) =>{
        try {
          setIsSaving(true)
-         const response = await axios.post('/api/events/createBooking/post',{
-            eventDate:startDate , from ,to ,eventTypeId:id , duration:eventType.minutes , userId
-         })
+         const response = await axios.post('/api/events/createBooking/post',booking)
          if(response.data.status == 200){
             router.push({
                 pathname:"/events/[user]/[event]/[date]",
                 query:{
                     user:session?.user?.name,
-                    event:eventType.id,
+                    event:id,
                     date:eventDate
                 }
             })
+            console.log('rrr')
          }
        } catch (error:any) {
             setIsSaving(false) 
             setHasError(true)
             setErrorMessage(error.response.data.message)
+            //console.log(error)
        }
 
     }
@@ -64,9 +64,11 @@ export default function index() {
     const { mutate } = useCreateNewBooking()
 
     const handleSubmit = (e:any) =>{
-      const { minutes} = eventType
-      e.preventDefault()
-       mutate( startDate,from,to,id,minutes , userId)
+       e.preventDefault()
+       const { minutes:duration} = eventType
+       const newBooking = {startDate,from,to,id,duration , userId}
+       mutate( newBooking)
+
     }
     const getSingleEventType= async() =>{
         const response = await axios.get(`/api/events/createBooking/${id}`)
@@ -133,3 +135,12 @@ export default function index() {
     </div>
   )
 }
+interface Booking{
+    startDate: any;
+    from: any;
+    to: any;
+    id: any;
+    duration:any
+    userId: any;
+}
+
