@@ -165,7 +165,7 @@ export default function Index() {
                                               </div>
                                            </div>
                                            {
-                                               event?.booking.length == 0 ?
+                                               event?.booking.length === 0 ?
                                                <div className='flex items-center px-4'>
                                                <Link href={{
                                                    pathname:'/events/[user]/[event]',
