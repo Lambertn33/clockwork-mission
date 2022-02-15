@@ -43,7 +43,7 @@ export default function Index() {
     }
     const createNewEvent = async(eventType:EventType)=>{
         try {
-            
+            setIsSaving(true)
             const response = await axios.post('/api/events/post',eventType)
             if(response.data.status == 200){
                 setIsSaving(false)
