@@ -31,13 +31,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (existingUser) {
     return res.status(409).json({ message: "Email address is already registered" });
   }
-  
 
   const hashedPassword = await hashPassword(password);
 
   await prisma.user.create({
     data: {
-      name:username,
+      name: username,
       email: userEmail,
       password: hashedPassword,
     },
